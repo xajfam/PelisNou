@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <script>
+        function updateGenreName(select) {
+            const selectedOption = select.options[select.selectedIndex];
+            document.getElementById('genre_name').value = selectedOption.dataset.name || '';
+        }
+        </script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cercador Pel·lícules</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!--<link rel="stylesheet" href="/static/css/style.css">-->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    
+
+</head>
+<body>
+    <header>
+        <h1>Cercador Pel·lícules</h1>
+    </header>
+    <main>
+        {% block content %}{% endblock %}   
+    </main>
+</body>
+</html>

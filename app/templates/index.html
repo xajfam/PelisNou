@@ -1,0 +1,42 @@
+
+{% extends "layout.html" %}
+{% block content %}
+    <form method="POST">
+        <label for="genre">Escull un gènere:</label>
+        <select name="genre" onchange="updateGenreName(this)">
+            <option value="">-- Tria un gènere --</option>
+            {% for genre in genres %}
+            <option value="{{ genre['id'] }}" data-name="{{ genre['name'] }}">{{ genre['name'] }}</option>
+            {% endfor %}
+        </select>
+        <input type="hidden" name="genre_name" id="genre_name">        
+        <button type="submit">Buscar</button>
+    </form>
+
+    {% if movies %}
+        <h2>Resultat{{ ' del gènere: ' + genre_name if genre_name else '' }}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)">Títol</th>
+                    <th onclick="sortTable(1)">Any</th>
+                    <th onclick="sortTable(2)">Puntuació</th>
+                    <th onclick="sortTable(3)">Valoracions</th>
+                    <th>Enllaç</th>
+                </tr>
+            </thead>
+            <tbody id="movieTableBody">
+                {% for movie in movies %}
+                    <tr>
+                        <td>{{ movie.title }}</td>
+                        <td>{{ movie.release_date[:4] if movie.release_date }}</td>
+                        <td>{{ movie.vote_average }}</td>
+                        <td>{{ movie.vote_count }}</td>
+                        <td><a href="https://www.themoviedb.org/movie/{{ movie.id }}" target="_blank">Detalls</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
+        
